@@ -1,0 +1,20 @@
+
+%option noyywrap
+%{
+#include<stdio.h>
+#include<string.h>
+%}
+%%
+^[a-z A-Z _][a-z A-Z 0-9 _]* {printf("%s is a Valid variable",yytext);} /*Checks Valid name*/
+.* {printf("%s is an Invalid variable",yytext);}
+%%
+
+int main()
+{
+
+printf("Enter the variable: \n");
+yylex(); 
+return 0;
+}
+
+

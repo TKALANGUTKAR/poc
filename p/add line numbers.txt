@@ -1,0 +1,23 @@
+
+%option noyywrap
+%{
+#include<stdio.h> 
+#include<string.h>
+int count = 1;
+%}
+/* Rules Section*/
+%%
+.* {printf("%d %s \n",count,yytext); 
+count++;
+}
+%%
+
+int main()
+{
+yyin = fopen("Lex.txt","r+"); 
+yylex();
+return 0;
+}
+
+
+

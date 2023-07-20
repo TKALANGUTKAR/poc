@@ -1,0 +1,25 @@
+/*lex program to find average*/
+%option noyywrap
+%{
+#include<stdio.h> 
+#include<string.h> 
+int divi = 0; 
+float count = 0.0;
+%}
+
+%%
+[0-9]+ {count = count + atof(yytext); 
+divi++;
+}
+%%
+
+int main()
+{
+printf("Enter the numbers: ");
+yylex(); 
+printf("The average is %f",count/divi); 
+return 0;
+}
+
+
+

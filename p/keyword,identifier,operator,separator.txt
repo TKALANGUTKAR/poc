@@ -1,0 +1,31 @@
+%option noyywrap
+%{
+int n=0;
+int keyword_count = 0;
+int identifier_count = 0;
+int operator_count = 0;
+int separator_count = 0;
+int float_count = 0;
+int int_count = 0;
+%}
+
+%%
+while|if|else {n++; printf("Keyword: %s",yytext); keyword_count++; }
+int|float|char       {n++; printf("\t Keyword: %s",yytext); keyword_count++; }
+[a-zA-Z][a-zA-Z0-9]* {n++; printf("\t Identifier: %s",yytext);identifier_count++; }
+[==|<=|=>|=|++|+|-|*|\|/] {n++; printf("\t Operator: %s",yytext); operator_count++; }
+[;,()|{}]            {n++; printf("\t Separator: %s",yytext); separator_count++; }
+[0-9]*"."[0-9]+ {n++; printf("\t Float: %s",yytext); float_count++; }
+[0-9]* {n++; printf("\t Integer: %s",yytext); int_count++; }
+
+.;                   
+%%
+
+int main() {
+    yylex();
+    printf("Total number of keywords: %d\n", keyword_count);
+    printf("Total number of identifiers: %d\n", identifier_count);
+    printf("Total number of operators: %d\n", operator_count);
+    printf("Total number of separators: %d\n", separator_count);
+    return 0;
+}

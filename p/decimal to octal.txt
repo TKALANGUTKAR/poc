@@ -1,0 +1,34 @@
+/*Decimal to Octal*/
+%option noyywrap
+%{
+#include<stdio.h> 
+#include <math.h> 
+#include <string.h>
+void convert(char*);
+%}
+%%
+^[0-9]* {convert(yytext);} /*Checks Line name*/
+.* /*ignores rest*/
+%%
+int main()
+{ printf("Enter the Number : \n"); 
+yylex(); 
+return 0;
+}
+void convert(char* a){
+int len = strlen(a), i, num = 0,ans=0,count=1; for (i = 0; i < len; i++) num = num * 10 + (a[i] - '0');
+	if(num<8)	{
+printf("%d",num);
+}else{
+while(num >= 8){
+int remainder = num%8; 
+num = num/8; 
+ans = ans + remainder*count; 
+count = count*10;
+} 
+printf("Octal number: %d",num); 
+printf("%d",ans);
+}
+}
+
+
